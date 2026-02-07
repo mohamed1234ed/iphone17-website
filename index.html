@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iPhone 17 Pro Max</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <div class="logo">iPhone 17 Pro Max</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#buy">Buy</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn">&#8679;</button>
+
+    <header class="container">
+        <h1>iPhone 17 Pro Max</h1>
+        <p>The iPhone 17 Pro Max is the latest flagship smartphone from Apple, featuring cutting-edge technology and a sleek design. With its powerful A17 Bionic chip, stunning OLED display, and advanced camera system, the iPhone 17 Pro Max offers an unparalleled user experience.</p>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Hero Section</h2>
+            <p>Experience the future of mobile technology with the iPhone 17 Pro Max. Its sleek design and powerful performance make it the ultimate device for both work and play.</p>
+            <img src="iphone17pro.png" alt="iPhone 17 Pro Max" class="parallax">
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>6.7-inch OLED display with ProMotion technology</li>
+                <li>A17 Bionic chip for lightning-fast performance</li>
+                <li>Triple-camera system with LiDAR scanner</li>
+                <li>5G connectivity for ultra-fast internet speeds</li>
+                <li>Improved battery life for all-day use</li>
+            </ul>
+        </section>
+
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <p>Check out the stunning design and features of the iPhone 17 Pro Max in our gallery.</p>
+            <img src="iphone17pro.png" alt="iPhone 17 Pro Max" class="parallax">
+        </section>
+
+        <section id="reviews">
+            <h2>Reviews</h2>
+            <p>See what critics and users are saying about the iPhone 17 Pro Max.</p>
+            <ul>
+                <li>"The iPhone 17 Pro Max is a game-changer in the smartphone industry." - Tech Reviewer</li>
+                <li>"The camera quality is outstanding, and the performance is unmatched." - User Review</li>
+                <li>"A must-have for anyone looking for the best smartphone experience." - Tech Expert</li>
+            </ul>
+        </section>
+
+        <section id="buy">
+            <h2>Buy Now</h2>
+            <p>Ready to experience the iPhone 17 Pro Max? Click the button below to purchase yours today!</p>
+            <button>Buy Now</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Apple Inc. All rights reserved.</p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const navbar = document.getElementById('navbar');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const parallaxImgs = document.querySelectorAll('.parallax');
+        const hamburger = document.querySelector('.hamburger');
+        const navLinksContainer = document.querySelector('.nav-links');
+
+        // Fade-in sections
+        function revealSections() {
+            sections.forEach(section => {
+                const top = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if(top < windowHeight - 100) section.classList.add('visible');
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            revealSections();
+
+            // Shrink Navbar
+            if(window.scrollY > 50){
+                navbar.classList.add('small');
+            } else {
+                navbar.classList.remove('small');
+            }
+
+            // Scroll Top Button
+            scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+
+            // Parallax effect
+            parallaxImgs.forEach(img => {
+                img.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+            });
+
+            // Highlight nav link
+            let current = '';
+            sections.forEach(section => {
+                if(scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href').substring(1) === current) link.classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                if(navLinksContainer.classList.contains('open')) navLinksContainer.classList.remove('open');
+            });
+        });
+
+        // Scroll to Top button click
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Hamburger menu toggle
+        hamburger.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('open');
+        });
+
+        // Initial reveal
+        window.addEventListener('load', revealSections);
+        // ألوان لكل Section
+const sectionColors = {
+    hero: '#5ac8fa',
+    features: '#ffd966',
+    gallery: '#ff7f50',
+    reviews: '#7fffd4',
+    buy: '#9370db'
+};
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        if(scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+    });
+
+    // تغيير لون Navbar حسب Section
+    if(current) {
+        navbar.style.backgroundColor = sectionColors[current] + 'cc'; // cc للشفافية
+    }
+
+    // زر Scroll to Top ثابت كما هو
+    scrollTopBtn.style.display = scrollY > 300 ? 'block' : 'none';
+
+    // Parallax effect
+    parallaxImgs.forEach(img => {
+        img.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+    });
+
+    // Highlight nav link
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href').substring(1) === current) link.classList.add('active');
+    });
+});
+    </script>
+</body>
+</html>
